@@ -9,31 +9,26 @@ import 'whitecodel_reels_controller.dart';
 
 class WhiteCodelReels extends GetView<WhiteCodelReelsController> {
   final BuildContext context;
-  final List<String>? videoList;
   final Widget? loader;
-  final bool isCaching;
-  final PageController? pageController;
+  final WhiteCodelReelsController whiteCodelReelsController;
   final Widget Function(BuildContext context, int index, Widget child,
       VideoPlayerController videoPlayerController)? builder;
 
   const WhiteCodelReels(
       {super.key,
       required this.context,
-      this.videoList,
+      required this.whiteCodelReelsController,
       this.loader,
-      this.pageController,
-      this.isCaching = false,
       this.builder});
 
   @override
   Widget build(BuildContext context) {
-    Get.delete<WhiteCodelReelsController>();
-    Get.lazyPut<WhiteCodelReelsController>(() => WhiteCodelReelsController(reelsVideoList: videoList ?? [], isCaching: isCaching));
+    Get.lazyPut<WhiteCodelReelsController>(() => whiteCodelReelsController);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Obx(
         () => PageView.builder(
-          controller: pageController ,
+          controller: controller.pageController,
           itemCount: controller.pageCount.value,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {

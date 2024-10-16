@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whitecodel_reels/whitecodel_reels.dart';
+import 'package:whitecodel_reels/whitecodel_reels_controller.dart';
 
 List<String> videos = [
   "https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_1mb.mp4",
@@ -57,9 +58,11 @@ class MyApp extends StatelessWidget {
                     loader: const Center(
                       child: CircularProgressIndicator(),
                     ),
-                    isCaching: false,
-                    videoList:
-                        List.generate(videos.length, (index) => videos[index]),
+                    whiteCodelReelsController: WhiteCodelReelsController(
+                        isCaching: false,
+                        reelsVideoList: videos,
+                        pageController:
+                            PageController(viewportFraction: 0.9999)),
                     builder: (context, index, child, videoPlayerController) {
                       bool isReadMore = false;
                       StreamController<double> videoProgressController =
