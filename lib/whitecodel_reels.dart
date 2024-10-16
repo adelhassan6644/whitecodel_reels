@@ -12,18 +12,16 @@ class WhiteCodelReels extends GetView<WhiteCodelReelsController> {
   final List<String>? videoList;
   final Widget? loader;
   final bool isCaching;
-  final Widget Function(
-      BuildContext context,
-      int index,
-      Widget child,
-      VideoPlayerController videoPlayerController,
-      PageController pageController)? builder;
+  final PageController? pageController;
+  final Widget Function(BuildContext context, int index, Widget child,
+      VideoPlayerController videoPlayerController)? builder;
 
   const WhiteCodelReels(
       {super.key,
       required this.context,
       this.videoList,
       this.loader,
+      this.pageController,
       this.isCaching = false,
       this.builder});
 
@@ -36,7 +34,7 @@ class WhiteCodelReels extends GetView<WhiteCodelReelsController> {
       backgroundColor: Colors.black,
       body: Obx(
         () => PageView.builder(
-          controller: controller.pageController,
+          controller: pageController ?? controller.pageController,
           itemCount: controller.pageCount.value,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
@@ -103,8 +101,7 @@ class WhiteCodelReels extends GetView<WhiteCodelReelsController> {
                         videoPlayerController:
                             controller.videoPlayerControllerList[index],
                       ),
-                      controller.videoPlayerControllerList[index],
-                      controller.pageController),
+                      controller.videoPlayerControllerList[index]),
         ),
       ),
     );
