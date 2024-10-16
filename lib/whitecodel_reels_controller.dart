@@ -26,8 +26,8 @@ class WhiteCodelReelsController extends GetxController
   CachedVideoControllerService videoControllerService =
       CachedVideoControllerService(DefaultCacheManager());
 
-  updateVideoList(list) {
-    (reelsVideoList).addAll(list);
+  updateVideoList(item) {
+    (reelsVideoList).add(item);
   }
 
   // Observable for loading state
