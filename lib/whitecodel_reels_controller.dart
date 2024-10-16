@@ -9,6 +9,12 @@ import 'video_controller_service.dart';
 // Controller class for managing the reels in the app
 class WhiteCodelReelsController extends GetxController
     with GetTickerProviderStateMixin, WidgetsBindingObserver {
+  // Constructor
+  WhiteCodelReelsController(
+      {required this.reelsVideoList,
+      required this.isCaching,
+      required this.pageController});
+
   // Page controller for managing pages of videos
   PageController pageController;
 
@@ -19,6 +25,10 @@ class WhiteCodelReelsController extends GetxController
   // Service for managing cached video controllers
   CachedVideoControllerService videoControllerService =
       CachedVideoControllerService(DefaultCacheManager());
+
+  updateVideoList(list) {
+    (reelsVideoList).addAll(list);
+  }
 
   // Observable for loading state
   final loading = true.obs;
@@ -67,12 +77,6 @@ class WhiteCodelReelsController extends GetxController
 
   // pageCount
   RxInt pageCount = 0.obs;
-
-  // Constructor
-  WhiteCodelReelsController(
-      {required this.reelsVideoList,
-      required this.isCaching,
-      required this.pageController});
 
   // Lifecycle method for handling app lifecycle state changes
   @override
